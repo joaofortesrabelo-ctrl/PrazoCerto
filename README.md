@@ -1,6 +1,6 @@
 # ⏰ PrazoCerto — Gestão de Tempo para Estudantes
 
-🔗 **Acesse online:** [https://joaofortesrabelo-ctrl.github.io/prazocerto/](https://joaofortesrabelo-ctrl.github.io/prazocerto/)
+🔗 **Acesse online:** [https://joaofortesrabelo-ctrl.github.io/PrazoCerto/](https://joaofortesrabelo-ctrl.github.io/PrazoCerto/)
 
 **Tema 9 — Aplicativo de Gestão de Tempo:** agenda e lista de tarefas para estudantes, com cores para prioridade e prazos.
 
