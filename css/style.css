@@ -116,6 +116,10 @@ kbd { font: 600 .8em/1 var(--font); padding: .25em .5em; border-radius: 6px; bac
 .btn-icon { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 40px; min-width: 40px; padding: 0 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font: 600 .88rem var(--font); cursor: pointer; transition: transform var(--t-fast), background var(--t-fast); }
 .btn-icon:hover { background: var(--surface-2); }
 .btn-icon:active { transform: scale(.95); }
+.btn-instalar { border-color: transparent; background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; box-shadow: var(--shadow-md); }
+.btn-instalar:hover { background: linear-gradient(135deg, var(--primary), var(--primary-2)); filter: brightness(1.08); }
+.btn-instalar[hidden] { display: none; }
+.ajuda-instalar { margin: 8px 0 16px; padding-left: 20px; display: grid; gap: 6px; }
 .btn-ajuda__q { font-weight: 900; font-size: 1.05rem; color: var(--primary); }
 .timer-pill { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 999px; background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; font-weight: 800; text-decoration: none; font-variant-numeric: tabular-nums; animation: pulso 2s ease-in-out infinite; }
 
@@ -495,6 +499,7 @@ a.kpi:hover { border-color: var(--primary); }
 
 /* Celular (até 600px) */
 @media (max-width: 600px) {
+  .btn-instalar__texto { display: none; }
   main { padding: 16px 14px 32px; }
   .topbar__inner { padding: 0 14px; gap: 8px; }
   .brand__name { font-size: 1.1rem; }

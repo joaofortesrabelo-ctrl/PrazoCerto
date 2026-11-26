@@ -6,7 +6,16 @@
   <meta name="description" content="PrazoCerto — agenda, tarefas, prazos e Pomodoro para estudantes universitários.">
   <meta name="theme-color" content="#4f46e5">
   <title>PrazoCerto — Gestão de Tempo para Estudantes</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏰</text></svg>">
+  <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/icons/icon-192.png" type="image/png" sizes="192x192">
+
+  <!-- App instalável (PWA): manifesto, ícone do iPhone e cor da barra -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PrazoCerto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Aplica o tema salvo antes de desenhar a página (evita "piscar") -->
   <script>
@@ -52,6 +61,7 @@
 
       <div class="topbar__actions">
         <a class="timer-pill" id="timer-pill" href="#foco" hidden aria-label="Pomodoro em andamento — abrir Foco">🍅 <span id="timer-pill-tempo">25:00</span></a>
+        <button type="button" class="btn-icon btn-instalar" id="btn-instalar" hidden title="Instalar o PrazoCerto como app"><span aria-hidden="true">📲</span><span class="btn-instalar__texto">Instalar app</span></button>
         <button type="button" class="btn-icon" id="btn-config" aria-haspopup="dialog" aria-label="Configurações" title="Configurações">⚙️</button>
         <button type="button" class="btn-icon" id="btn-ajuda" aria-haspopup="dialog" aria-label="Ajuda e atalhos" title="Ajuda (?)"><span class="btn-ajuda__q" aria-hidden="true">?</span></button>
         <button type="button" class="btn-icon btn-tema" id="btn-tema" aria-pressed="false" title="Alternar tema (T)">
@@ -388,6 +398,13 @@
         <li><strong>Acompanhe o Progresso:</strong> nível, sequência de dias e conquistas.</li>
         <li><strong>Ative os avisos</strong> em ⚙️ Configurações: o navegador te avisa 1 hora antes de cada prazo (dá para mudar a antecedência).</li>
       </ol>
+      <h3 id="ajuda-instalar">Instalar como app</h3>
+      <p class="modal__sub" style="margin-top:0">O PrazoCerto pode ser instalado e aberto como um app, com ícone próprio e <strong>funcionando sem internet</strong>. Suas tarefas continuam salvas no aparelho.</p>
+      <ul class="ajuda-instalar">
+        <li><strong>Computador (Chrome ou Edge):</strong> clique em <em>📲 Instalar app</em> no topo, ou no ícone de instalar na barra de endereço.</li>
+        <li><strong>Android (Chrome):</strong> toque em <em>📲 Instalar app</em>, ou no menu ⋮ → <em>Instalar app</em> / <em>Adicionar à tela inicial</em>.</li>
+        <li><strong>iPhone (Safari):</strong> toque em Compartilhar <span aria-hidden="true">⬆️</span> → <em>Adicionar à Tela de Início</em>.</li>
+      </ul>
       <h3>Atalhos de teclado</h3>
       <dl class="atalhos">
         <div><dt><kbd>N</kbd></dt><dd>Nova tarefa</dd></div>

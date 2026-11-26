@@ -17,6 +17,22 @@
 
 Não precisa instalar nada.
 
+## 📲 Instalar como app (PWA)
+
+O PrazoCerto é um **app instalável**: ganha ícone na tela inicial, abre em janela própria (sem a barra do navegador) e **funciona sem internet**.
+
+1. Abra o link do site: [https://joaofortesrabelo-ctrl.github.io/PrazoCerto/](https://joaofortesrabelo-ctrl.github.io/PrazoCerto/)
+2. Instale:
+   - **Computador (Chrome ou Edge):** botão **📲 Instalar app** no topo, ou o ícone de instalar na barra de endereço.
+   - **Android (Chrome):** botão **📲 Instalar app**, ou menu ⋮ → **Instalar app** / **Adicionar à tela inicial**.
+   - **iPhone (Safari):** Compartilhar ⬆️ → **Adicionar à Tela de Início**.
+
+Como funciona:
+- `manifest.json` diz ao navegador o nome, os ícones, as cores e que o app abre em tela cheia (`standalone`).
+- `sw.js` (*service worker*) guarda os arquivos do app no aparelho. Com internet ele busca sempre a versão mais nova; sem internet, usa a cópia guardada.
+- O botão "Instalar app" usa o evento `beforeinstallprompt` do navegador; no iPhone, que não tem esse evento, ele mostra o passo a passo do Safari.
+- A instalação só funciona pelo link (https). Abrindo o `index.html` direto do computador, o app funciona normalmente, mas sem a opção de instalar.
+
 > **Dica para a apresentação:** em ⚙️ **Configurações → 🧪 Carregar exemplo**, o app é preenchido com tarefas, prazos e sessões de foco de demonstração. As datas são calculadas a partir do dia de hoje.
 
 ---
@@ -26,6 +42,8 @@ Não precisa instalar nada.
 ```
 prazocerto/
 ├── index.html        → estrutura semântica (header, nav, main, section, form, fieldset, dialog, footer)
+├── manifest.json     → dados do app instalável (nome, ícones, cores, atalhos)
+├── sw.js             → service worker: guarda os arquivos para abrir sem internet
 ├── css/
 │   └── style.css     → tema claro/escuro (variáveis CSS), componentes, animações, responsividade
 ├── js/
@@ -33,7 +51,9 @@ prazocerto/
 │   ├── data.js       → prioridades, tipos, matérias padrão, conquistas, dados de exemplo
 │   └── storage.js    → toda a leitura e gravação no LocalStorage
 └── assets/
-    └── images/
+    ├── images/
+    ├── icons/        → ícones do app (192, 512, maskable, iPhone, favicon)
+    └── screenshots/  → imagens mostradas na janela de instalação
 ```
 
 ---
@@ -132,6 +152,7 @@ Escreva tudo numa linha, por exemplo: `Lista de Cálculo amanhã 23:59 !alta #ca
 - **Desktop (> 1024px):** menu no topo, painéis lado a lado (calendário + dia, timer + resumo).
 - **Tablet (≤ 1024px):** painéis empilhados e indicadores em 2 colunas. A partir de 860px o menu vira uma **barra inferior** (estilo app).
 - **Celular (≤ 600px):** formulários em 1 coluna, calendário compacto, botões grandes para o toque.
+- **Instalado como app:** abre em tela cheia com ícone próprio, inclusive sem internet (veja "Instalar como app").
 
 ## 💾 Chaves no LocalStorage
 

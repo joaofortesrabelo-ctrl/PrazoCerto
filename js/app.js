@@ -1409,6 +1409,48 @@ function etapaSegura(nome, fn) {
   try { fn(); } catch (erro) { console.warn(`[PrazoCerto] Falha ao iniciar: ${nome}`, erro); }
 }
 
+/* ---------- App instalável (PWA) ---------- */
+let pedidoInstalacao = null; // evento guardado para abrir a janela de instalação do navegador
+
+const rodandoComoApp = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const ehIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+function prepararInstalacao() {
+  const btn = $('#btn-instalar');
+  // Guarda os arquivos no aparelho para abrir sem internet (só funciona em http/https, não em file://)
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    navigator.serviceWorker.register('sw.js').catch(erro => console.warn('[PrazoCerto] Service worker não registrado', erro));
+  }
+  if (rodandoComoApp()) return; // já está instalado e aberto como app
+
+  // Chrome/Edge (computador e Android): o navegador avisa que dá para instalar
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    pedidoInstalacao = e;
+    btn.hidden = false;
+  });
+  window.addEventListener('appinstalled', () => {
+    pedidoInstalacao = null;
+    btn.hidden = true;
+    toast('📲 PrazoCerto instalado! Agora ele abre como app, até sem internet.');
+  });
+  // iPhone/iPad não tem janela de instalação: o botão mostra o passo a passo do Safari
+  if (ehIOS()) btn.hidden = false;
+
+  btn.addEventListener('click', async () => {
+    if (pedidoInstalacao) {
+      pedidoInstalacao.prompt();
+      const { outcome } = await pedidoInstalacao.userChoice;
+      pedidoInstalacao = null;
+      if (outcome === 'accepted') btn.hidden = true;
+      else toast('Tudo bem! Você pode instalar depois pelo botão 📲 ou pelo menu do navegador.');
+    } else {
+      abrirModal('dlg-ajuda');
+      $('#ajuda-instalar').scrollIntoView({ block: 'start' });
+    }
+  });
+}
+
 function iniciar() {
   montarCamposFixos();
   etapaSegura('matérias', montarSelectMaterias);
@@ -1418,6 +1460,7 @@ function iniciar() {
   etapaSegura('conquistas', () => verificarConquistas({ silencioso: true }));
   etapaSegura('tela inicial', () => mostrarView(location.hash.slice(1), false));
   etapaSegura('telas', atualizarTudo);
+  etapaSegura('instalação', prepararInstalacao);
 }
 
 document.addEventListener('DOMContentLoaded', iniciar);
