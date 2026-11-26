@@ -37,6 +37,12 @@ Como funciona:
 
 ---
 
+## 💬 Prévia do link
+
+Ao compartilhar o link no WhatsApp, Instagram, Telegram ou Discord, aparece um cartão com a imagem `assets/og-imagem.jpg` (1200×630), o título e uma frase sobre o app. Isso vem das tags **Open Graph** (`og:`) e **Twitter Card** no `<head>` do `index.html`.
+
+---
+
 ## 📁 Estrutura
 
 ```
@@ -52,6 +58,7 @@ prazocerto/
 │   └── storage.js    → toda a leitura e gravação no LocalStorage
 └── assets/
     ├── images/
+    ├── og-imagem.jpg → imagem da prévia do link (WhatsApp, Instagram…)
     ├── icons/        → ícones do app (192, 512, maskable, iPhone, favicon)
     └── screenshots/  → imagens mostradas na janela de instalação
 ```
